@@ -22,32 +22,39 @@ export default function Home({ posts }) {
             {flashMsg && <p className="text-green-500">{flashMsg}</p>}
 
             <div className="px-4 sm:px-8 md:px-16 lg:px-28">
-                {posts.data.map((post) => (
-                    <div
-                        key={post.id}
-                        className="m-2 p-2 border border-gray-300"
-                    >
-                        <div className="text-sm text-slate-600">
-                            <span>Posted On: </span>
-                            <span>
-                                {new Date(post.created_at).toLocaleTimeString()}
-                            </span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    {posts.data.map((post) => (
+                        <div
+                            key={post.id}
+                            className="rounded-lg shadow-custom border-gray-300 p-4 bg-white"
+                        >
+                            <div className="text-sm text-slate-600 mb-2">
+                                <span>Posted On: </span>
+                                <span>
+                                    {new Date(
+                                        post.created_at
+                                    ).toLocaleDateString()}
+                                </span>
+                            </div>
+                            <p className="font-medium text-gray-800 mb-4 line-clamp-3">
+                                {post.body}
+                            </p>
+                            {/* <a
+                                href={`/posts/${post.id}`}
+                                className="inline-block text-white bg-primary hover:bg-primary hover:shadow-hoverHighlight font-bold py-2 px-4 rounded-lg transition duration-200"
+                            >
+                                Read More
+                            </a> */}
+
+                            <a
+                                href={route("posts.show", post)}
+                                className="inline-block text-white bg-primary hover:bg-primary hover:shadow-hoverHighlight font-bold py-2 px-4 rounded-lg transition duration-200"
+                            >
+                                Read More
+                            </a>
                         </div>
-                        <p className="font-medium">{post.body}</p>
-                        {/* <Link
-                            href={`/posts/${post.id}`}
-                            className="text-link font-bold text-blue-500"
-                        >
-                            Read More..
-                        </Link> */}
-                        <Link
-                            href={route("posts.show", post)}
-                            className="text-link font-bold text-blue-500"
-                        >
-                            Read More..
-                        </Link>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
 
             <div className="px-4 sm:px-8 md:px-16 lg:px-28 py-10 ml-4">
